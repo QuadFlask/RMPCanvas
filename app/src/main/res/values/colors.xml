@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorPrimary">#222</color>
+	<color name="colorPrimaryDark">#333</color>
+	<color name="colorAccent">#ff4081</color>
+
+
+	<color name="openColors0">#bb868e96</color>
+	<color name="openColors1">#bbfa5252</color>
+	<color name="openColors2">#bbe64980</color>
+	<color name="openColors3">#bbbe4bdb</color>
+	<color name="openColors4">#bb7950f2</color>
+	<color name="openColors5">#bb4c6ef5</color>
+	<color name="openColors6">#bb228ae6</color>
+	<color name="openColors7">#bb15aabf</color>
+	<color name="openColors8">#bb12b886</color>
+	<color name="openColors9">#bb40c057</color>
+	<color name="openColors10">#bb82c91e</color>
+	<color name="openColors11">#bbfab005</color>
+	<color name="openColors12">#bbfd7e14</color>
+</resources>

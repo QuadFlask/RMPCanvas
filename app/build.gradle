@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'realm-android'
+
+android {
+	compileSdkVersion rootProject.ext.compileSdkVersion
+	buildToolsVersion rootProject.ext.buildToolsVersion
+	defaultConfig {
+		applicationId "com.github.quadflask.rmpcanvas"
+		minSdkVersion rootProject.ext.minSdkVersion
+		targetSdkVersion rootProject.ext.targetSdkVersion
+		versionCode 1
+		versionName "1.0"
+		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+	}
+	buildTypes {
+		def host = InetAddress.getLocalHost().getCanonicalHostName()
+		debug {
+			// This will automatically detect the IP address of the machine building RealmTasks.
+			// It is assumed that this machine is also running the Object Server.
+			// If not, replace 'host' with the IP of the machine hosting the server.
+			buildConfigField "String", "OBJECT_SERVER_IP", "\"${host}\""
+			buildConfigField "String", "OBJECT_SERVER_IP", "\"192.168.0.3\""
+		}
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+			// This will automatically detect the IP address of the machine building RealmTasks.
+			// It is assumed that this machine is also running the Object Server.
+			// If not, replace 'host' with the IP of the machine hosting the server.
+			buildConfigField "String", "OBJECT_SERVER_IP", "\"${host}\""
+		}
+	}
+	lintOptions {
+		abortOnError false
+	}
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+	dexOptions {
+		javaMaxHeapSize "3g"
+	}
+}
+
+realm {
+	syncEnabled = true
+}
+
+dependencies {
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+
+	compile rootProject.ext.appCompat
+	compile rootProject.ext.design
+
+	apt rootProject.ext.butterknifeCompiler
+	apt rootProject.ext.daggerCompiler
+
+	compile rootProject.ext.guava
+	compile rootProject.ext.butterknife
+	compile rootProject.ext.lightWeightStream
+	compile rootProject.ext.rxAndroid
+	compile rootProject.ext.rxBinding
+	compile rootProject.ext.rxAsync
+	compile rootProject.ext.rxLifecycle
+	compile rootProject.ext.rxLifecycleComponents
+
+	androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+		exclude group: 'com.android.support', module: 'support-annotations'
+	})
+	testCompile rootProject.ext.junit
+}

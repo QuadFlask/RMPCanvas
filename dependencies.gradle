@@ -1,0 +1,59 @@
+ext {
+// Build SDK versions
+	buildToolsVersion = '24.0.3'
+	minSdkVersion = 21
+	compileSdkVersion = 24
+	targetSdkVersion = 24
+
+// Dependencies - Support Library
+	appCompat =
+			'com.android.support:appcompat-v7:24.2.1'
+	design =
+			'com.android.support:design:24.2.1'
+	recyclerView =
+			'com.android.support:recyclerview-v7:24.2.1'
+	constranitLayout =
+			'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
+
+// Dependencies - Dependency injection
+	butterknife =
+			'com.jakewharton:butterknife:8.0.1'
+	butterknifeCompiler =
+			'com.jakewharton:butterknife-compiler:8.0.1'
+	dagger =
+			'com.google.dagger:dagger:2.4'
+	daggerCompiler =
+			'com.google.dagger:dagger-compiler:2.4'
+	jsr250 =
+			'javax.annotation:jsr250-api:1.0'
+
+// Dependencies - Rx
+	rxAndroid =
+			'io.reactivex:rxandroid:1.2.0'
+	rxJava =
+			'io.reactivex:rxjava:1.1.5'
+	rxLifecycle =
+			'com.trello:rxlifecycle:0.6.1'
+	rxLifecycleComponents =
+			'com.trello:rxlifecycle-components:0.6.1'
+	rxReplayingShare =
+			'com.jakewharton.rx:replaying-share:1.0.1'
+	rxAsync =
+			'io.reactivex:rxjava-async-util:0.21.0'
+	rxJavaDebug =
+			'io.reactivex:rxjava-debug:1.0.3'
+	rxRelay =
+			'com.jakewharton.rxrelay:rxrelay:1.1.0'
+	rxBinding =
+			'com.jakewharton.rxbinding:rxbinding:0.4.0'
+
+// Dependencies - Stream
+	lightWeightStream =
+			'com.annimon:stream:1.0.9'
+	junit =
+			'junit:junit:4.12'
+
+// Dependencies - util
+	guava =
+			'com.google.guava:guava:19.0'
+}
