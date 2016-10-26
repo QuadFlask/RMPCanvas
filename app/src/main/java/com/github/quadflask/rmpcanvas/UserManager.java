@@ -19,12 +19,13 @@ package com.github.quadflask.rmpcanvas;
 import io.realm.Realm;
 import io.realm.SyncConfiguration;
 import io.realm.SyncUser;
+import io.realm.rx.RealmObservableFactory;
 
 public class UserManager {
 
 	// Configure Realm for the current active user
 	public static void setActiveUser(SyncUser user) {
-		SyncConfiguration defaultConfig = new SyncConfiguration.Builder(user, CanvasApplication.REALM_URL).build();
+		SyncConfiguration defaultConfig = new SyncConfiguration.Builder(user, CanvasApplication.REALM_URL).rxFactory(new RealmObservableFactory()).build();
 		Realm.setDefaultConfiguration(defaultConfig);
 	}
 }

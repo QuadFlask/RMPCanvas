@@ -8,8 +8,9 @@ import com.github.quadflask.rmpcanvas.model.DrawingEvent;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.realm.Realm;
-import io.realm.RealmResults;
 import io.realm.SyncUser;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class CanvasActivity extends BaseActivity {
 	@BindView(R.id.ib_back)
@@ -49,6 +50,7 @@ public class CanvasActivity extends BaseActivity {
 
 		onFabClick();
 		canvasView.asObservable()
+				.subscribeOn(Schedulers.newThread())
 				.compose(bindToLifecycle())
 				.onBackpressureBuffer()
 				.map(motionEvent -> {
@@ -57,6 +59,7 @@ public class CanvasActivity extends BaseActivity {
 					drawingEvent.userUUID = CanvasApplication.getCurrentUUID();
 					return drawingEvent;
 				})
+				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(drawingEvent -> {
 					realm.executeTransactionAsync(_ream -> _ream.copyToRealm(drawingEvent));
 				}, Throwable::printStackTrace);
@@ -87,14 +90,15 @@ public class CanvasActivity extends BaseActivity {
 	}
 
 	private void drawToCanvasFromRealmResults(Realm realm) {
-		final RealmResults<DrawingEvent> drawingEvents = realm
-				.where(DrawingEvent.class)
+		realm.where(DrawingEvent.class)
 				.notEqualTo("userUUID", CanvasApplication.getCurrentUUID())
 				.greaterThan("timestamp", drewTimestamp)
-				.findAll();
-		if (!drawingEvents.isEmpty()) {
-			canvasView.drawDrawingEvents(drawingEvents);
-			drewTimestamp = drawingEvents.last().timestamp;
-		}
+				.findAllAsync()
+				.asObservable()
+				.filter(drawingEvents -> !drawingEvents.isEmpty())
+				.subscribe(drawingEvents -> {
+					canvasView.drawDrawingEvents(drawingEvents);
+					drewTimestamp = drawingEvents.last().timestamp;
+				}, Throwable::printStackTrace);
 	}
 }

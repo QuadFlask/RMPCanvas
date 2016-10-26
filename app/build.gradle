@@ -21,7 +21,7 @@ android {
 			// It is assumed that this machine is also running the Object Server.
 			// If not, replace 'host' with the IP of the machine hosting the server.
 			buildConfigField "String", "OBJECT_SERVER_IP", "\"${host}\""
-			buildConfigField "String", "OBJECT_SERVER_IP", "\"192.168.0.3\""
+			buildConfigField "String", "OBJECT_SERVER_IP", "\"192.168.0.14\""
 		}
 		release {
 			minifyEnabled false
