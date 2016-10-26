@@ -68,7 +68,23 @@ public class CanvasActivity extends BaseActivity {
 	@Override
 	protected void onStop() {
 		realm.removeAllChangeListeners();
-		realm.close();
+		realm.close(); // TODO close not working
+//		Caused by: java.lang.IllegalStateException: A Realm controlled by this user is still open. Close all Realms before logging out: /data/data/com.github.quadflask.rmpcanvas/files/realm-object-server/d12d00f6f5811a3b13fe80ffd91e424d/canvas
+//		at io.realm.SyncUser.logout(SyncUser.java:250)
+//		at com.github.quadflask.rmpcanvas.CanvasActivity.onStop(CanvasActivity.java:73)
+//		at android.app.Instrumentation.callActivityOnStop(Instrumentation.java:1278)
+//		at android.app.Activity.performStop(Activity.java:6395)
+//		at android.app.ActivityThread.performDestroyActivity(ActivityThread.java:3790)
+//		at android.app.ActivityThread.handleDestroyActivity(ActivityThread.java:3849) 
+//		at android.app.ActivityThread.-wrap5(ActivityThread.java) 
+//		at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1398) 
+//		at android.os.Handler.dispatchMessage(Handler.java:102) 
+//		at android.os.Looper.loop(Looper.java:148) 
+//		at android.app.ActivityThread.main(ActivityThread.java:5417) 
+//		at java.lang.reflect.Method.invoke(Native Method) 
+//		at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726) 
+//		at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616) 
+//		10-26 11:21:49.982 800-14933/? W/ActivityManager:   Force finishing activity com.github.quadflask.rmpcanvas/.EnterRoomActivity
 		realm = null;
 		SyncUser.currentUser().logout();
 		super.onStop();
